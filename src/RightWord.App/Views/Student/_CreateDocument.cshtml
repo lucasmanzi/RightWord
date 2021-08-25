@@ -1,0 +1,53 @@
+﻿@model RightWord.App.ViewModels.DocumentViewModel
+@{
+    ViewData["Title"] = "Create Document";
+}
+
+<div class="modal-header">
+    <h4 class="modal-title">@ViewData["Title"]</h4>
+    <button type="button" class="close" data-dismiss="modal">
+        <span aria-hidden="true">x</span><span class="sr-only">Fechar</span>
+    </button>
+</div>
+
+<form asp-action="CreateDocument" enctype="multipart/form-data" method="post">
+    <div class="modal-body">
+
+        <input type="hidden" asp-for="StudentId" />
+
+        @*<partial name="_Document" />*@
+
+        <div class="form-group">
+            <label asp-for="Description" class="control-label"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DocumentType" class="control-label"></label>
+            <select asp-for="DocumentType" class="form-control">
+                <option value="0">Passport</option>
+                <option value="1">CPF</option>
+                <option value="2">RG</option>
+                <option value="4">Other</option>
+            </select>
+            <span asp-validation-for="DocumentType" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ImageUpload" class="control-label"></label>
+            <div class="custom-file">
+                <input type="file" class="custom-file" asp-for="ImageUpload">
+                @*<label data-browse="Procurar" style="width: 400px" class="custom-file" for="ImagemUpload"></label>*@
+                @*<label style="display: none" id="img_nome"></label>*@
+            </div>
+            <span asp-validation-for="ImageUpload" class="text-danger"></span>
+        </div>
+
+        <div class="modal-footer">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Add" class="btn btn-success" />
+                <input type="button" value="Fechar" class="btn btn-info" data-dismiss="modal" />
+            </div>
+        </div>
+
+    </div>
+</form>

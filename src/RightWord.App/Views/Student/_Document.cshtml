@@ -1,0 +1,27 @@
+﻿@model RightWord.App.ViewModels.DocumentViewModel
+
+<div class="form-group">
+    <label asp-for="Description" class="control-label"></label>
+    <input asp-for="Description" class="form-control" />
+    <span asp-validation-for="Description" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="DocumentType" class="control-label"></label>
+    <select asp-for="DocumentType" class="form-control">
+        <option value="0">General English</option>
+        <option value="1">General English - 25 Weeks Academic Year</option>
+        <option value="2">General English - Online Classes</option>
+        <option value="3">IELTS</option>
+        <option value="4">Other</option>
+    </select>
+    <span asp-validation-for="DocumentType" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="ImageUpload" class="control-label"></label>
+    <div class="custom-file">
+        <input type="file" class="custom-file" asp-for="ImageUpload">
+        @*<label data-browse="Procurar" style="width: 400px" class="custom-file" for="ImagemUpload"></label>*@
+        @*<label style="display: none" id="img_nome"></label>*@
+    </div>
+    <span asp-validation-for="ImageUpload" class="text-danger"></span>
+</div>

@@ -1,0 +1,63 @@
+﻿@model RightWord.App.ViewModels.AgencyViewModel
+
+@{
+    ViewData["Title"] = "Create New Agency";
+}
+<div class="container">
+    <h1>Create</h1>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Create">
+                @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+                <vc:Summary></vc:Summary>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                }
+                else
+                {
+                    <input type="hidden" asp-for="Email" class="form-control" />
+                }
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                @if (User.IsInRole("Admin"))
+                {
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                        </label>
+                    </div>
+                }
+                else
+                {
+                    <input class="form-check-input" type="hidden" asp-for="Active" />
+                }
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (User.IsInRole("Admin"))
+    {
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+    }
+
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

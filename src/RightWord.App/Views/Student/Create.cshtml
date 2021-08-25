@@ -1,0 +1,254 @@
+﻿@model RightWord.App.ViewModels.StudentViewModel
+
+@{
+    ViewData["Title"] = "Create New Student";
+}
+<div class="container">
+
+    <h1>New Student</h1>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Create" enctype="multipart/form-data">
+                @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+                <vc:Summary></vc:Summary>
+                @if (!User.IsInRole("Admin"))
+                {
+                    <select hidden asp-for="AgencyId" class="form-control" asp-items="@(new SelectList(Model.Agencies, "Id", "Name"))"></select>
+                }
+                else
+                {
+                    <div class="form-group">
+                        <label asp-for="AgencyId" class="control-label"></label>
+                        <select asp-for="AgencyId" class="form-control" asp-items="@(new SelectList(Model.Agencies, "Id", "Name"))"></select>
+                    </div>
+                }
+                @if (!User.IsInRole("Admin"))
+                {
+                    <input hidden asp-for="Email" class="form-control" />
+                }
+                else
+                {
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                }
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="FirstName" class="control-label"></label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="SurName" class="control-label"></label>
+                            <input asp-for="SurName" class="form-control" />
+                            <span asp-validation-for="SurName" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Passport" class="control-label"></label>
+                            <input asp-for="Passport" class="form-control" />
+                            <span asp-validation-for="Passport" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Country" class="control-label"></label>
+                            <select asp-for="Country" class="form-control" asp-items="@(new SelectList(Model.Countries, "Key", "Value").OrderBy(x =>x.Value))">
+                                <option></option>
+                            </select>
+                            <span asp-validation-for="Country" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="NativeLanguage" class="control-label"></label>
+                            <select asp-for="NativeLanguage" class="form-control" asp-items="@(new SelectList(Model.Languages, "Key", "Value").OrderBy(x =>x.Value))">
+                                <option></option>
+                            </select>
+                            <span asp-validation-for="NativeLanguage" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Session" class="control-label"></label>
+                            <select asp-for="Session" class="form-control">
+                                <option value="0">Morning</option>
+                                <option value="1">Afternoon</option>
+                            </select>
+                            <span asp-validation-for="Session" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Duration" class="control-label"></label>
+                            <select asp-for="Duration" class="form-control">
+                                <option value="0">No</option>
+                                <option value="25">25 Weeks (Academic Year)</option>
+                                <option value="1">1 Week</option>
+                                <option value="2">2 Weeks</option>
+                                <option value="3">3 Weeks</option>
+                                <option value="4">4 Weeks</option>
+                                <option value="5">5 Weeks</option>
+                                <option value="6">6 Weeks</option>
+                                <option value="7">7 Weeks</option>
+                                <option value="8">8 Weeks</option>
+                                <option value="9">9 Weeks</option>
+                                <option value="10">10 Weeks</option>
+                                <option value="11">11 Weeks</option>
+                                <option value="12">12 Weeks</option>
+                            </select>
+                            <span asp-validation-for="Duration" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="CourseType" class="control-label"></label>
+                            <select asp-for="CourseType" class="form-control">
+                                <option value="0">General English</option>
+                                <option value="1">General English - 25 Weeks Academic Year</option>
+                                <option value="2">General English - Online Classes</option>
+                                <option value="3">IELTS</option>
+                                <option value="4">Other</option>
+                            </select>
+                            <span asp-validation-for="CourseType" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="StartDate" class="control-label"></label>
+                            <input asp-for="StartDate" class="form-control" />
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="FinishDate" class="control-label"></label>
+                            <input asp-for="FinishDate" class="form-control" />
+                            <span asp-validation-for="FinishDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="ArrivalDate" class="control-label"></label>
+                            <input asp-for="ArrivalDate" class="form-control" />
+                            <span asp-validation-for="ArrivalDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Dob" class="control-label"></label>
+                            <input asp-for="Dob" class="form-control" />
+                            <span asp-validation-for="Dob" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Accomodation" class="control-label"></label>
+                            <select asp-for="Accomodation" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">Yes, Student Accomodation</option>
+                                <option value="2">Yes, Host Family</option>
+                            </select>
+                            <span asp-validation-for="Accomodation" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="AccomodationDuration" class="control-label"></label>
+                            <select asp-for="AccomodationDuration" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">1 Week</option>
+                                <option value="2">2 Weeks</option>
+                                <option value="3">3 Weeks</option>
+                                <option value="4">4 Weeks</option>
+                                <option value="5">5 Weeks</option>
+                                <option value="6">6 Weeks</option>
+                                <option value="7">7 Weeks</option>
+                                <option value="8">8 Weeks</option>
+                                <option value="9">9 Weeks</option>
+                                <option value="10">10 Weeks</option>
+                                <option value="11">11 Weeks</option>
+                                <option value="12">12 Weeks</option>
+                                <option value="13">13 Weeks</option>
+                                <option value="14">14 Weeks</option>
+                            </select>
+                            <span asp-validation-for="AccomodationDuration" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="PassportUpload" class="control-label"></label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file" asp-for="PassportUpload">
+                            </div>
+                            <span asp-validation-for="PassportUpload" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                @if (!User.IsInRole("Student"))
+                {
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                        </label>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="hidden" asp-for="Active" />
+                        </label>
+                    </div>
+                }
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (!User.IsInRole("Student"))
+    {
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+    }
+
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

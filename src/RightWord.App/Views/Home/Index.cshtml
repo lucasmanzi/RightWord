@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="container">
+    <vc:Summary></vc:Summary>
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome!</h1>
+        <p><a>@User.Identity.Name</a></p>
+        @if (User.IsInRole("Student"))
+        {
+            <p>This is the student area!</p>
+        }
+        else if(User.IsInRole("Agency"))
+        {
+            <p>This is the agency area!</p>
+        }
+    </div>
+</div>

@@ -1,0 +1,157 @@
+﻿@model IEnumerable<RightWord.App.ViewModels.StudentViewModel>
+
+@{
+    ViewData["Title"] = "All Students";
+}
+<div class="container">
+    <h1>Students List</h1>
+    <vc:Summary></vc:Summary>
+
+    <p>
+        <a asp-action="Create" class="btn btn-primary" style="width:auto">Create New Student</a>
+    </p>
+</div>
+@*<div id="toolbar" class="select">
+    <select class="form-control">
+        <option value="">Export Basic</option>
+        <option value="all">Export All</option>
+        <option value="selected">Export Selected</option>
+    </select>
+</div>*@
+
+<table id="table" class="table"
+       data-toggle="table"
+       @*data-height="500"*@
+       data-filter="true"
+       data-show-pagination-switch="true"
+       data-pagination="true"
+       data-show-footer="true"
+       data-show-columns="true"
+       data-page-list="[10, 25, 50, 100, all]"
+       data-filter-control="true"
+       data-show-print="true"
+       @*data-show-export="true"*@
+       data-click-to-select="true"
+       @*data-toolbar="#toolbar"*@
+       data-show-toggle="true"
+       data-show-search-clear-button="true">
+    <thead>
+        <tr>
+            <th></th>
+            <th data-sortable="true">
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th data-field="Email" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th data-field="FirstName" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th data-field="SurName" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.SurName)
+            </th>
+            <th data-field="Passport" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.Passport)
+            </th>
+            <th data-field="Agency" data-filter-control="select" data-sortable="true">
+                @Html.DisplayNameFor(model => model.Agency)
+            </th>
+            <th data-field="Country" data-filter-control="select" data-sortable="true">
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th data-field="NativeLanguage" data-filter-control="select" data-sortable="true">
+                @Html.DisplayNameFor(model => model.NativeLanguage)
+            </th>
+            <th data-field="Session" data-filter-control="select" data-sortable="true">
+                @Html.DisplayNameFor(model => model.Session)
+            </th>
+            <th data-field="Duration" data-filter-control="select" data-sortable="true">
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th data-field="CourseType" data-filter-control="select" data-sortable="true">
+                @Html.DisplayNameFor(model => model.CourseType)
+            </th>
+            <th data-field="StartDate" data-filter-control="select" data-sortable="true">
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th data-field="FinishDate" data-filter-control="select" data-sortable="true">
+                @Html.DisplayNameFor(model => model.FinishDate)
+            </th>
+            <th data-field="ArrivalDate" data-filter-control="select" data-sortable="true">
+                @Html.DisplayNameFor(model => model.ArrivalDate)
+            </th>
+            <th data-field="Dob" data-filter-control="select" data-sortable="true">
+                @Html.DisplayNameFor(model => model.Dob)
+            </th>
+            <th data-field="Accomodation" data-filter-control="select" data-sortable="true">
+                @Html.DisplayNameFor(model => model.Accomodation)
+            </th>
+            <th data-field="AccomodationDuration" data-filter-control="select" data-sortable="true">
+                @Html.DisplayNameFor(model => model.AccomodationDuration)
+            </th>
+        </tr>
+    </thead>
+    <tbody id="myTable">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-pencil-alt"></span></a>
+                    @*<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Active)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SurName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Passport)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Agency.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NativeLanguage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Session)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FinishDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArrivalDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dob)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Accomodation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccomodationDuration)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

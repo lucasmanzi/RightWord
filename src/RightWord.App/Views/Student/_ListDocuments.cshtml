@@ -1,0 +1,47 @@
+﻿@model RightWord.App.ViewModels.StudentViewModel
+
+<div style="padding-top: 20px">
+    <div>
+        <hr />
+        <h4>Documents</h4>
+    </div>
+    <p>
+        <a supress-by-action="Edit,ObterEndereco" asp-action="CreateDocument" asp-route-id="@Model.Id" data-modal="">Add New</a>
+        @*<a supress-by-action="Edit,ObterEndereco" asp-action="GetStudentDocuments" asp-route-id="@Model.Id" class="btn btn-info" data-modal="">
+            <span title="Editar" class="fa fa-pencil-alt"></span>
+        </a>*@
+    </p>
+    @if (Model.Documents != null)
+    {
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Documents.FirstOrDefault().Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Documents.FirstOrDefault().DocumentType)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Documents)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DocumentType)
+                        </td>
+                        <td class="text-right">
+                            <a class="btn btn-danger" asp-action="Delete" asp-controller="Produtos" asp-route-id="@item.Id"><span class="fa fa-trash"></span></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+</div>
