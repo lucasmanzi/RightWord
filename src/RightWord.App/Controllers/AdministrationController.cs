@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace RightWord.App.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdministrationController : BaseController
     {
         private readonly RoleManager<IdentityRole> _roleManager;
