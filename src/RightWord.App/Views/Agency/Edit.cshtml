@@ -15,11 +15,8 @@
                 <vc:Summary></vc:Summary>
 
                 <input type="hidden" asp-for="Id" />
-                @*<div class="form-group">
-                    <label asp-for="Email" class="control-label"></label>
-                    <input asp-for="Email" class="form-control" />*@
-                <span hidden asp-validation-for="Email" class="text-danger"></span>
-                @*</div>*@
+                <input type="hidden" asp-for="Email"/>
+
                 <div class="form-group">
                     <label asp-for="Name" class="control-label"></label>
                     <input asp-for="Name" class="form-control" />

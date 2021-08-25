@@ -24,7 +24,7 @@
                         <select asp-for="AgencyId" class="form-control" asp-items="@(new SelectList(Model.Agencies, "Id", "Name"))"></select>
                     </div>
                 }
-                @if (!User.IsInRole("Admin"))
+                @if (User.IsInRole("Student"))
                 {
                     <input hidden asp-for="Email" class="form-control" />
                 }

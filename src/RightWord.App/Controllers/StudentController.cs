@@ -22,7 +22,7 @@ namespace RightWord.App.Controllers
         private readonly IAgencyRepository _agencyRepository;
         //private readonly IDocumentRepository _documentRepository;
         private readonly IMapper _mapper;
-        
+
         public StudentController(IStudentRepository studentRepository,
                                  IAgencyRepository agencyRepository,
                                  IStudentService studentService,
@@ -99,6 +99,9 @@ namespace RightWord.App.Controllers
                 studentViewModel.Email = User.Identity.Name;
                 studentViewModel.AgencyId = _agencyRepository.Find(a => a.Email == "admin@rightword.com").Result.FirstOrDefault().Id;
             }
+            else
+                if (User.IsInRole("Agency"))
+                studentViewModel.AgencyId = _agencyRepository.Find(a => a.Email == User.Identity.Name).Result.FirstOrDefault().Id;
 
             if (!ModelState.IsValid) return View(studentViewModel);
 
@@ -117,10 +120,10 @@ namespace RightWord.App.Controllers
             {
                 return View(studentViewModel);
             }
-            
+
             await _studentService.Add(_mapper.Map<Student>(studentViewModel));
 
-            if(!IsValidOperation()) return View(studentViewModel);
+            if (!IsValidOperation()) return View(studentViewModel);
 
             TempData["Success"] = "Student successfully created!";
 
