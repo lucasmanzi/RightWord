@@ -48,7 +48,7 @@
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
             <th data-field="SurName" data-filter-control="input" data-sortable="true">
-                @Html.DisplayNameFor(model => model.SurName)
+                @Html.DisplayNameFor(model => model.Surname)
             </th>
             <th data-field="Passport" data-filter-control="input" data-sortable="true">
                 @Html.DisplayNameFor(model => model.Passport)
@@ -74,9 +74,9 @@
             <th data-field="StartDate" data-filter-control="select" data-sortable="true">
                 @Html.DisplayNameFor(model => model.StartDate)
             </th>
-            <th data-field="FinishDate" data-filter-control="select" data-sortable="true">
+            @*<th data-field="FinishDate" data-filter-control="select" data-sortable="true">
                 @Html.DisplayNameFor(model => model.FinishDate)
-            </th>
+            </th>*@
             <th data-field="ArrivalDate" data-filter-control="select" data-sortable="true">
                 @Html.DisplayNameFor(model => model.ArrivalDate)
             </th>
@@ -110,7 +110,7 @@
                     @Html.DisplayFor(modelItem => item.FirstName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.SurName)
+                    @Html.DisplayFor(modelItem => item.Surname)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Passport)
@@ -136,9 +136,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.StartDate)
                 </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.FinishDate)
-                </td>
+                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.ArrivalDate)
                 </td>

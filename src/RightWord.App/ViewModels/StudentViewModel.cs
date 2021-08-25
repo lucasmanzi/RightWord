@@ -28,10 +28,10 @@ namespace RightWord.App.ViewModels
         [StringLength(200, ErrorMessage = "Field {0} lenght between {2} and {1} caracters.", MinimumLength = 2)]
         public string FirstName { get; set; }
 
-        [DisplayName("SurName")]
+        [DisplayName("Surname")]
         [Required(ErrorMessage = "Field {0} is required")]
         [StringLength(200, ErrorMessage = "Field {0} lenght between {2} and {1} caracters.", MinimumLength = 2)]
-        public string SurName { get; set; }
+        public string Surname { get; set; }
 
         [DisplayName("Passport")]
         [Required(ErrorMessage = "Field {0} is required")]
@@ -68,10 +68,10 @@ namespace RightWord.App.ViewModels
         [Required(ErrorMessage = "Field {0} is required")]
         public DateTime? StartDate { get; set; }
 
-        [DisplayName("Finish Date")]
-        [BindProperty, DataType(DataType.Date)]
-        [Required(ErrorMessage = "Field {0} is required")]
-        public DateTime? FinishDate { get; set; }
+        //[DisplayName("Finish Date")]
+        //[BindProperty, DataType(DataType.Date)]
+        //[Required(ErrorMessage = "Field {0} is required")]
+        //public DateTime? FinishDate { get; set; }
 
         [DisplayName("Arrival Date")]
         [BindProperty, DataType(DataType.Date)]

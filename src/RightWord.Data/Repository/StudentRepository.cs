@@ -23,7 +23,7 @@ namespace RightWord.Data.Repository
         public async Task<IEnumerable<Student>> GetStudentsAgencies()
         {
             return await Db.Students.AsNoTracking().Include(a => a.Agency)
-                .OrderBy(s => s.SurName).ToListAsync();
+                .OrderBy(s => s.Surname).ToListAsync();
         }
 
         public async Task<IEnumerable<Student>> GetStudentByAgency(Guid agencyId)

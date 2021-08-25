@@ -16,7 +16,7 @@ namespace RightWord.Business.Models.Validations
                 .NotEmpty()
                 .Length(2, 200);
 
-            RuleFor(a => a.SurName)
+            RuleFor(a => a.Surname)
                 .NotEmpty()
                 .Length(2, 200);
         }

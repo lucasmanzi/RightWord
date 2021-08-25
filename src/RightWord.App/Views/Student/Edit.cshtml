@@ -17,17 +17,17 @@
                 <input type="hidden" asp-for="Id" />
                 @if (User.IsInRole("Admin"))
                 {
-                    <div class="form-group">
-                        <label asp-for="AgencyId" class="control-label"></label>
-                        <select asp-for="AgencyId" class="form-control" asp-items="@(new SelectList(Model.Agencies, "Id", "Name"))">
-                        </select>
-                        <span asp-validation-for="AgencyId" class="text-danger"></span>
-                    </div>
+                <div class="form-group">
+                    <label asp-for="AgencyId" class="control-label"></label>
+                    <select asp-for="AgencyId" class="form-control" asp-items="@(new SelectList(Model.Agencies, "Id", "Name"))">
+                    </select>
+                    <span asp-validation-for="AgencyId" class="text-danger"></span>
+                </div>
                 }
                 else
                 {
-                    @*<label asp-for="AgencyId" class="control-label"></label>*@
-                    <select hidden asp-for="AgencyId" class="form-control" asp-items="@(new SelectList(Model.Agencies, "Id", "Name"))"></select>
+                @*<label asp-for="AgencyId" class="control-label"></label>*@
+                <select hidden asp-for="AgencyId" class="form-control" asp-items="@(new SelectList(Model.Agencies, "Id", "Name"))"></select>
                 }
 
                 <div class="row">
@@ -42,9 +42,9 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label asp-for="SurName" class="control-label"></label>
-                            <input asp-for="SurName" class="form-control" />
-                            <span asp-validation-for="SurName" class="text-danger"></span>
+                            <label asp-for="Surname" class="control-label"></label>
+                            <input asp-for="Surname" class="form-control" />
+                            <span asp-validation-for="Surname" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -134,15 +134,9 @@
                             <span asp-validation-for="StartDate" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="FinishDate" class="control-label"></label>
-                            <input asp-for="FinishDate" class="form-control" />
-                            <span asp-validation-for="FinishDate" class="text-danger"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
+
+
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label asp-for="ArrivalDate" class="control-label"></label>
@@ -150,6 +144,8 @@
                             <span asp-validation-for="ArrivalDate" class="text-danger"></span>
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label asp-for="Dob" class="control-label"></label>
@@ -157,8 +153,7 @@
                             <span asp-validation-for="Dob" class="text-danger"></span>
                         </div>
                     </div>
-                </div>
-                <div class="row">
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label asp-for="Accomodation" class="control-label"></label>
@@ -170,6 +165,9 @@
                             <span asp-validation-for="Accomodation" class="text-danger"></span>
                         </div>
                     </div>
+                </div>
+
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label asp-for="AccomodationDuration" class="control-label"></label>
@@ -210,19 +208,19 @@
 
                 @if (!User.IsInRole("Student"))
                 {
-                    <div class="form-group form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
-                        </label>
-                    </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                    </label>
+                </div>
                 }
                 else
                 {
-                    <div hidden class="form-group form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
-                        </label>
-                    </div>
+                <div hidden class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                    </label>
+                </div>
                 }
                 <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-primary" />

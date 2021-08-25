@@ -11,7 +11,7 @@ namespace RightWord.Business.Models
 
         public string Email { get; set; }
         public string FirstName { get; set; }
-        public string SurName { get; set; }
+        public string Surname { get; set; }
         public string Passport { get; set; }
         public string PassportImage { get; set; }
         public string Country { get; set; }
@@ -20,7 +20,7 @@ namespace RightWord.Business.Models
         public int Duration { get; set; }
         public CourseType CourseType { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime FinishDate { get; set; }
+        //public DateTime FinishDate { get; set; }
         public DateTime ArrivalDate { get; set; }
         public DateTime Dob { get; set; }
         public AccomodationType Accomodation { get; set; }

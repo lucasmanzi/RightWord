@@ -17,7 +17,7 @@ namespace RightWord.Data.Mappings
                 .IsRequired()
                 .HasColumnType("varchar(200)");
 
-            builder.Property(c => c.SurName)
+            builder.Property(c => c.Surname)
                 .IsRequired()
                 .HasColumnType("varchar(200)");
             
