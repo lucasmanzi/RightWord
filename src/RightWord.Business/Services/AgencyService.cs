@@ -47,13 +47,22 @@ namespace RightWord.Business.Services
 
         public async Task Delete(Guid id)
         {
-            if (_agencyRepository.GetAgencyStudents(id).Result.Students.Any())
+            var agency = _agencyRepository.GetAgencyStudents(id).Result;
+
+            if (agency == null)
+            {
+                Notify("Can't find the Agency to delete");
+                return;
+            }
+            if (agency.Students.Any())
             {
                 Notify("This agency has affiliated students registered.");
                 return;
             }
-
+            
             await _agencyRepository.Delete(id);
+
+
         }
 
         public void Dispose()

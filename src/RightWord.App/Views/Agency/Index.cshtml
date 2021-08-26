@@ -7,7 +7,7 @@
     <h1>Agencies List</h1>
     <vc:Summary></vc:Summary>
     <p>
-        <a  asp-action="Create" class="btn btn-primary" style="width:auto">Create New Agency</a>
+        <a asp-action="Create" class="btn btn-primary" style="width:auto">Create New Agency</a>
     </p>
     <table id="table" class="table"
            data-toggle="table"
@@ -28,7 +28,7 @@
         <thead>
             <tr>
                 <th></th>
-                <th  data-sortable="true">
+                <th data-sortable="true">
                     @Html.DisplayNameFor(model => model.Active)
                 </th>
                 <th data-field="Name" data-filter-control="input" data-sortable="true">
@@ -45,9 +45,12 @@
                 <tr>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-pencil-alt"></span></a>
-                        @*<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
-                    </td>
+                        @*<a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash-alt"></span></a>
+                        }
+                        </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Active)
                     </td>

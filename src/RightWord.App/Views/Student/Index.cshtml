@@ -12,12 +12,12 @@
     </p>
 </div>
 @*<div id="toolbar" class="select">
-    <select class="form-control">
-        <option value="">Export Basic</option>
-        <option value="all">Export All</option>
-        <option value="selected">Export Selected</option>
-    </select>
-</div>*@
+        <select class="form-control">
+            <option value="">Export Basic</option>
+            <option value="all">Export All</option>
+            <option value="selected">Export Selected</option>
+        </select>
+    </div>*@
 
 <table id="table" class="table"
        data-toggle="table"
@@ -75,8 +75,8 @@
                 @Html.DisplayNameFor(model => model.StartDate)
             </th>
             @*<th data-field="FinishDate" data-filter-control="select" data-sortable="true">
-                @Html.DisplayNameFor(model => model.FinishDate)
-            </th>*@
+                    @Html.DisplayNameFor(model => model.FinishDate)
+                </th>*@
             <th data-field="ArrivalDate" data-filter-control="select" data-sortable="true">
                 @Html.DisplayNameFor(model => model.ArrivalDate)
             </th>
@@ -97,9 +97,12 @@
             <tr>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-pencil-alt"></span></a>
-                    @*<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
-                </td>
+                    @*<a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash-alt"></span></a>
+                    }
+                    </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Active)
                 </td>
@@ -137,8 +140,8 @@
                     @Html.DisplayFor(modelItem => item.StartDate)
                 </td>
                 @*<td>
-                    @Html.DisplayFor(modelItem => item.FinishDate)
-                </td>*@
+                        @Html.DisplayFor(modelItem => item.FinishDate)
+                    </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.ArrivalDate)
                 </td>

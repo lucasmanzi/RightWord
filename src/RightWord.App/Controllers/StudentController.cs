@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RightWord.App.Extensions;
 using RightWord.App.ViewModels;
@@ -20,12 +21,14 @@ namespace RightWord.App.Controllers
         private readonly IStudentRepository _studentRepository;
         private readonly IStudentService _studentService;
         private readonly IAgencyRepository _agencyRepository;
+        private readonly UserManager<IdentityUser> _userManager;
         //private readonly IDocumentRepository _documentRepository;
         private readonly IMapper _mapper;
 
         public StudentController(IStudentRepository studentRepository,
                                  IAgencyRepository agencyRepository,
                                  IStudentService studentService,
+                                 UserManager<IdentityUser> userManager,
                                  //IDocumentRepository documentRepository,
                                  IMapper mapper,
                                  INotificator notificator) : base(notificator)
@@ -33,6 +36,7 @@ namespace RightWord.App.Controllers
             _studentRepository = studentRepository;
             _agencyRepository = agencyRepository;
             _studentService = studentService;
+            _userManager = userManager;
             //_documentRepository = documentRepository;
             _mapper = mapper;
         }
@@ -82,7 +86,7 @@ namespace RightWord.App.Controllers
             if (User.IsInRole("Student"))
             {
                 studentViewModel.Email = User.Identity.Name;
-                studentViewModel.AgencyId = _agencyRepository.Find(a => a.Email == "admin@rightword.com").Result.FirstOrDefault().Id;
+                studentViewModel.AgencyId = _agencyRepository.Find(a => a.Email == "senior@rightword.com").Result.FirstOrDefault().Id;
             }
 
             return View(studentViewModel);
@@ -97,7 +101,7 @@ namespace RightWord.App.Controllers
             if (User.IsInRole("Student"))
             {
                 studentViewModel.Email = User.Identity.Name;
-                studentViewModel.AgencyId = _agencyRepository.Find(a => a.Email == "admin@rightword.com").Result.FirstOrDefault().Id;
+                studentViewModel.AgencyId = _agencyRepository.Find(a => a.Email == "senior@rightword.com").Result.FirstOrDefault().Id;
             }
             else
                 if (User.IsInRole("Agency"))
@@ -209,7 +213,11 @@ namespace RightWord.App.Controllers
 
             if (!IsValidOperation()) return View(studentViewModel);
 
-            TempData["Success"] = "Student successfully edited!";
+            var user = await _userManager.FindByNameAsync(studentViewModel.Email);
+
+            if (user != null) { await _userManager.DeleteAsync(user); }
+            
+            TempData["Success"] = "Student successfully deleted!";
 
             return RedirectToAction(nameof(Index));
         }

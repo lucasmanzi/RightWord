@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RightWord.App.ViewModels;
 using RightWord.Business.Interfaces;
@@ -17,15 +18,18 @@ namespace RightWord.App.Controllers
     {
         private readonly IAgencyRepository _agencyRepository;
         private readonly IAgencyService _agencyService;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly IMapper _mapper;
 
         public AgencyController(IAgencyRepository agencyRepository,
                                 IAgencyService agencyService,
-                                 IMapper mapper,
-                                 INotificator notificator) : base(notificator)
+                                UserManager<IdentityUser> userManager,
+                                IMapper mapper,
+                                INotificator notificator) : base(notificator)
         {
             _agencyRepository = agencyRepository;
             _agencyService = agencyService;
+            _userManager = userManager;
             _mapper = mapper;
         }
 
@@ -72,6 +76,13 @@ namespace RightWord.App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AgencyViewModel agencyViewModel)
         {
+            if (User.IsInRole("Agency"))
+            {
+                agencyViewModel.Email = User.Identity.Name;
+                ModelState.Clear();
+                TryValidateModel(agencyViewModel);
+            }
+
             if (!ModelState.IsValid) return View(agencyViewModel);
 
             await _agencyService.Add(_mapper.Map<Agency>(agencyViewModel));
@@ -130,23 +141,17 @@ namespace RightWord.App.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id, string email)
         {
-            var agencyViewModel = _mapper.Map<AgencyViewModel>(await _agencyRepository.GetById(id));
-            if (agencyViewModel == null) return NotFound();
+            var user = await _userManager.FindByNameAsync(email);
 
             await _agencyService.Delete(id);
 
-            if (!IsValidOperation()) return View(agencyViewModel);
+            if (user != null) { await _userManager.DeleteAsync(user); }
 
             TempData["Success"] = "Agency successfully deleted!";
 
             return RedirectToAction(nameof(Index));
         }
-
-        //private async Task<AgencyViewModel> GetAgency(Guid id)
-        //{
-        //    var agency = _mapper.Map<AgencyViewModel>(await _agencyRepository.GetById(id));
-        //}
     }
 }
