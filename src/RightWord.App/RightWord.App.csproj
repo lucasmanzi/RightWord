@@ -25,4 +25,8 @@
 		<ProjectReference Include="..\RightWord.Data\RightWord.Data.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="wwwroot\uploadedFiles\" />
+	</ItemGroup>
+
 </Project>

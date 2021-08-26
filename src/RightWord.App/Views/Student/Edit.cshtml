@@ -197,7 +197,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label asp-for="PassportUpload" class="control-label"></label>
-                            <img src="~/images/@Model.PassportImage" alt="@Model.PassportImage" style="width: 100px; height: 100px" />
+                            <div class="form-group">
+                                <a class="btn btn-outline-primary" href="~/uploadedFiles/@Model.PassportImage" target="_blank">
+                                    Open Current File
+                                </a>
+                                @*<a class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewFileModal">
+                                        Open Current File
+                                    </a>*@
+                            </div>
                             <div class="custom-file">
                                 <input type="file" class="custom-file" asp-for="PassportUpload">
                             </div>
@@ -235,6 +242,25 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    @*<div class="modal fade" id="viewFileModal" tabindex="-1" aria-labelledby="viewfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewfileModalLabel">Passport Image</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe src="~/uploadedFiles/@Model.PassportImage" class="w-100 h-auto"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
     @*<div id="myModal" class="modal fade in">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -245,9 +271,9 @@
 
     @if (!User.IsInRole("Student"))
     {
-        <div>
-            <a asp-action="Index">Back to List</a>
-        </div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
     }
 </div>
 

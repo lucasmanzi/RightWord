@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /src/RightWord.App/wwwroot/images
+/src/RightWord.App/wwwroot/uploadedFiles
+/publish.zip

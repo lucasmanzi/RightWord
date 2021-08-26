@@ -305,7 +305,7 @@ namespace RightWord.App.Controllers
         {
             if (arquivo == null || arquivo.Length <= 0) return false;
 
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", imgPrefixo + arquivo.FileName);
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploadedFiles", imgPrefixo + arquivo.FileName);
 
             if (System.IO.File.Exists(path))
             {
