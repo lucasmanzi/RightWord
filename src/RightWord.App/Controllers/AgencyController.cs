@@ -7,6 +7,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using RightWord.App.Extensions;
 using RightWord.App.ViewModels;
 using RightWord.Business.Interfaces;
 using RightWord.Business.Models;
@@ -61,6 +62,8 @@ namespace RightWord.App.Controllers
         [Authorize(Roles = "Admin, Agency")]
         public async Task<IActionResult> Create()
         {
+            var agencyViewModel = FillAgency(new AgencyViewModel());
+
             if (User.IsInRole("Agency"))
             {
                 var result = await _agencyRepository.Find(x => x.Email == User.Identity.Name);
@@ -68,7 +71,7 @@ namespace RightWord.App.Controllers
                     return RedirectToAction("Edit/", result.FirstOrDefault().Id.ToString());
             }
 
-            return View();
+            return View(agencyViewModel);
         }
 
         [Authorize(Roles = "Admin, Agency")]
@@ -101,6 +104,7 @@ namespace RightWord.App.Controllers
         public async Task<IActionResult> Edit(Guid id)
         {
             var agencyViewModel = _mapper.Map<AgencyViewModel>(await _agencyRepository.GetById(id));
+            agencyViewModel = await FillAgency(agencyViewModel);
 
             if (agencyViewModel == null) return NotFound();
 
@@ -133,6 +137,9 @@ namespace RightWord.App.Controllers
         {
             var agencyViewModel = _mapper.Map<AgencyViewModel>(await _agencyRepository.GetById(id));
 
+            if (agencyViewModel.Email == "senior@rightword.com")
+                return RedirectToAction(nameof(Index));
+
             if (agencyViewModel == null) return NotFound();
 
             return View(agencyViewModel);
@@ -152,6 +159,13 @@ namespace RightWord.App.Controllers
             TempData["Success"] = "Agency successfully deleted!";
 
             return RedirectToAction(nameof(Index));
+        }
+        
+        private Task<AgencyViewModel> FillAgency(AgencyViewModel agency)
+        {
+            agency.Countries = CultureHelper.CountryList();
+
+            return Task.FromResult(agency);
         }
     }
 }

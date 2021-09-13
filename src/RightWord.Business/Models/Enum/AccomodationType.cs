@@ -1,6 +1,6 @@
 ﻿namespace RightWord.Business.Models
 {
-    public enum AccomodationType
+    public enum AccommodationType
     {
         No,
         Student,

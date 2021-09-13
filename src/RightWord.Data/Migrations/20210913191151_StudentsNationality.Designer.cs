@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RightWord.Data.Context;
 
 namespace RightWord.Data.Migrations
 {
     [DbContext(typeof(RightWordDbContext))]
-    partial class RightWordDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210913191151_StudentsNationality")]
+    partial class StudentsNationality
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,13 +65,9 @@ namespace RightWord.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(40)");
 
-                    b.Property<string>("StudentNationalities")
+                    b.Property<string>("StudentsNationality")
                         .IsRequired()
                         .HasColumnType("varchar(300)");
-
-                    b.Property<string>("ZipCode")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 

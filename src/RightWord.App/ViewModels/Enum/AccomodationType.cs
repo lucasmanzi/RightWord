@@ -2,10 +2,10 @@
 
 namespace RightWord.App.ViewModels
 {
-    public enum AccomodationType
+    public enum AccommodationType
     {
         No,
-        [Description("Yes, Student Accomodation")]
+        [Description("Yes, Student Accommodation")]
         Student,
         [Description("Yes, Host Family")]
         HostFamily

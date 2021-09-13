@@ -213,3 +213,9 @@ select option[disabled]:first-child {
     font-weight: bold;
     color: #0277BD;
 }
+
+@media print {
+    .noPrint {
+        display: none;
+    }
+}

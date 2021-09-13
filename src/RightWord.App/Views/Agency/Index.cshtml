@@ -9,59 +9,108 @@
     <p>
         <a asp-action="Create" class="btn btn-primary" style="width:auto">Create New Agency</a>
     </p>
-    <table id="table" class="table"
-           data-toggle="table"
-           @*data-height="500"*@
-           data-filter="true"
-           data-show-pagination-switch="true"
-           data-pagination="true"
-           data-show-footer="true"
-           data-show-columns="true"
-           data-page-list="[10, 25, 50, 100, all]"
-           data-filter-control="true"
-           data-show-print="true"
-           @*data-show-export="true"*@
-           data-click-to-select="true"
-           @*data-toolbar="#toolbar"*@
-           data-show-toggle="true"
-           data-show-search-clear-button="true">
-        <thead>
-            <tr>
-                <th></th>
-                <th data-sortable="true">
-                    @Html.DisplayNameFor(model => model.Active)
-                </th>
-                <th data-field="Name" data-filter-control="input" data-sortable="true">
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th data-field="Email" data-filter-control="input" data-sortable="true">
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-            </tr>
-        </thead>
-        <tbody id="myTable">
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-pencil-alt"></span></a>
-                        @*<a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <a asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash-alt"></span></a>
-                        }
-                        </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Active)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
 </div>
+
+<table id="table" class="table"
+       data-toggle="table"
+       @*data-height="500"*@
+       data-filter="true"
+       data-show-pagination-switch="true"
+       data-pagination="true"
+       data-show-footer="true"
+       data-show-columns="true"
+       data-page-list="[10, 25, 50, 100, all]"
+       data-filter-control="true"
+       data-show-print="true"
+       @*data-show-export="true"*@
+       data-click-to-select="true"
+       @*data-toolbar="#toolbar"*@
+       data-show-toggle="true"
+       data-show-search-clear-button="true">
+    <thead>
+        <tr>
+            <th></th>
+            <th data-sortable="true">
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th data-field="Email" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th data-field="Name" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th data-field="LegalName" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.LegalName)
+            </th>
+            <th data-field="BusinessOwner" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.BusinessOwner)
+            </th>
+            <th data-field="BusinessRegistration" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.BusinessRegistration)
+            </th>
+            <th data-field="Address" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th data-field="ZipCode" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.ZipCode)
+            </th>
+            <th data-field="Country" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th data-field="PhoneNumber" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th data-field="StudentNationalities" data-filter-control="input" data-sortable="true">
+                @Html.DisplayNameFor(model => model.StudentNationalities)
+            </th>
+        </tr>
+    </thead>
+    <tbody id="myTable">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-pencil-alt"></span></a>
+                    <a asp-action="Details" asp-route-id="@item.Id"><span class="fa fa-search"></span></a>
+                    @if (User.IsInRole("Admin") && item.Email != "senior@rightword.com")
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash-alt"></span></a>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Active)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LegalName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BusinessOwner)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BusinessRegistration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ZipCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentNationalities)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

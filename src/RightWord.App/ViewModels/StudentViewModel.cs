@@ -83,13 +83,13 @@ namespace RightWord.App.ViewModels
         [Required(ErrorMessage = "Field {0} is required")]
         public DateTime? Dob { get; set; }
 
-        [DisplayName("Accomodation")]
+        [DisplayName("Accommodation")]
         [Required(ErrorMessage = "Field {0} is required")]
-        public AccomodationType Accomodation { get; set; }
+        public AccommodationType Accommodation { get; set; }
         
-        [DisplayName("Accomodation Duration (Weeks)")]
+        [DisplayName("Accommodation Duration (Weeks)")]
         [Required(ErrorMessage = "Field {0} is required")]
-        public int AccomodationDuration { get; set; }
+        public int AccommodationDuration { get; set; }
 
         [DisplayName("Active?")]
         public bool Active { get; set; }

@@ -23,8 +23,8 @@ namespace RightWord.Business.Models
         //public DateTime FinishDate { get; set; }
         public DateTime ArrivalDate { get; set; }
         public DateTime Dob { get; set; }
-        public AccomodationType Accomodation { get; set; }
-        public int AccomodationDuration { get; set; }
+        public AccommodationType Accommodation { get; set; }
+        public int AccommodationDuration { get; set; }
         public bool Active { get; set; }
 
         //EF Relations

@@ -83,11 +83,11 @@
             <th data-field="Dob" data-filter-control="select" data-sortable="true">
                 @Html.DisplayNameFor(model => model.Dob)
             </th>
-            <th data-field="Accomodation" data-filter-control="select" data-sortable="true">
-                @Html.DisplayNameFor(model => model.Accomodation)
+            <th data-field="Accommodation" data-filter-control="select" data-sortable="true">
+                @Html.DisplayNameFor(model => model.Accommodation)
             </th>
-            <th data-field="AccomodationDuration" data-filter-control="select" data-sortable="true">
-                @Html.DisplayNameFor(model => model.AccomodationDuration)
+            <th data-field="AccommodationDuration" data-filter-control="select" data-sortable="true">
+                @Html.DisplayNameFor(model => model.AccommodationDuration)
             </th>
         </tr>
     </thead>
@@ -97,7 +97,7 @@
             <tr>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-pencil-alt"></span></a>
-                    @*<a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
+                    <a asp-action="Details" asp-route-id="@item.Id"><span class="fa fa-search"></span></a>
                     @if (User.IsInRole("Admin"))
                     {
                         <a asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash-alt"></span></a>
@@ -149,10 +149,10 @@
                     @Html.DisplayFor(modelItem => item.Dob)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Accomodation)
+                    @Html.DisplayFor(modelItem => item.Accommodation)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.AccomodationDuration)
+                    @Html.DisplayFor(modelItem => item.AccommodationDuration)
                 </td>
             </tr>
         }

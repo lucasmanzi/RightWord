@@ -59,7 +59,12 @@ namespace RightWord.Business.Services
                 Notify("This agency has affiliated students registered.");
                 return;
             }
-            
+            if (agency.Email.ToLower() == "senior@rightword.com")
+            {
+                Notify("This action is not allowed for this agency.");
+                return;
+            }
+
             await _agencyRepository.Delete(id);
 
 

@@ -121,17 +121,19 @@ namespace RightWord.App.Controllers
 
             var usersList = await _userManager.GetUsersInRoleAsync(role.Name);
 
-            
             foreach (var user in _userManager.Users)
             {
-                var userRoleViewModel = new UserRoleViewModel
+                if (user.UserName != User.Identity.Name && user.UserName.ToLower() != "support@rightword.com")
                 {
-                    UserId = user.Id,
-                    UserName = user.UserName,
-                    IsSelected = usersList.Any(x => x.Id == user.Id)
-                };
+                    var userRoleViewModel = new UserRoleViewModel
+                    {
+                        UserId = user.Id,
+                        UserName = user.UserName,
+                        IsSelected = usersList.Any(x => x.Id == user.Id)
+                    };
 
-                model.Add(userRoleViewModel);
+                    model.Add(userRoleViewModel);
+                }
             }
 
             return View(model);

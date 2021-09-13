@@ -4,31 +4,105 @@
     ViewData["Title"] = "Create New Agency";
 }
 <div class="container">
-    <h1>Create</h1>
+    <h1>New Agency</h1>
 
     <hr />
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <form asp-action="Create">
                 @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
                 <vc:Summary></vc:Summary>
 
                 @if (User.IsInRole("Admin"))
                 {
-                    <div class="form-group">
-                        <label asp-for="Email" class="control-label"></label>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Email" class="control-label"></label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
                     </div>
                 }
                 else
                 {
                     <input type="hidden" asp-for="Email" class="form-control" />
                 }
-                <div class="form-group">
-                    <label asp-for="Name" class="control-label"></label>
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="LegalName" class="control-label"></label>
+                            <input asp-for="LegalName" class="form-control" />
+                            <span asp-validation-for="LegalName" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="BusinessOwner" class="control-label"></label>
+                            <input asp-for="BusinessOwner" class="form-control" />
+                            <span asp-validation-for="BusinessOwner" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="BusinessRegistration" class="control-label"></label>
+                            <input asp-for="BusinessRegistration" class="form-control" />
+                            <span asp-validation-for="BusinessRegistration" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Country" class="control-label"></label>
+                            <select asp-for="Country" class="form-control" asp-items="@(new SelectList(Model.Countries, "Key", "Value").OrderBy(x =>x.Value))">
+                                <option></option>
+                            </select>
+                            <span asp-validation-for="Country" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Address" class="control-label"></label>
+                            <input asp-for="Address" class="form-control" />
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="ZipCode" class="control-label"></label>
+                            <input asp-for="ZipCode" class="form-control" />
+                            <span asp-validation-for="ZipCode" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="PhoneNumber" class="control-label"></label>
+                            <input asp-for="PhoneNumber" class="form-control" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label asp-for="StudentNationalities" class="control-label"></label>
+                            <input asp-for="StudentNationalities" class="form-control" placeholder="Separate by commas" />
+                            <span asp-validation-for="StudentNationalities" class="text-danger"></span>
+                        </div>
+                    </div>
                 </div>
                 @if (User.IsInRole("Admin"))
                 {
