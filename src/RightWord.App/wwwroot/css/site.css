@@ -214,6 +214,25 @@ select option[disabled]:first-child {
     color: #0277BD;
 }
 
+/*.table td.fit,
+.table th.fit {
+    white-space: nowrap;
+    width: 1%;
+}
+*/
+
+
+td.checkbox {
+    text-align: right;
+    /* center checkbox horizontally */
+}
+
+.bootstrap-table .fixed-table-container .table td.checkbox {
+    vertical-align: top;
+}
+
+
+
 @media print {
     .noPrint {
         display: none;

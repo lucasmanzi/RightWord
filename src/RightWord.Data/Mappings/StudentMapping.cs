@@ -37,6 +37,9 @@ namespace RightWord.Data.Mappings
                 .IsRequired()
                 .HasColumnType("varchar(120)");
 
+            builder.Property(c => c.PartnerName)
+                .HasColumnType("varchar(300)");
+
             builder.HasMany(s => s.Documents)
                 .WithOne(d => d.Student)
                 .HasForeignKey(d => d.StudentId);

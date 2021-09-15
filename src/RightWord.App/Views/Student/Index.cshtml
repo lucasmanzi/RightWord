@@ -75,8 +75,8 @@
                 @Html.DisplayNameFor(model => model.StartDate)
             </th>
             @*<th data-field="FinishDate" data-filter-control="select" data-sortable="true">
-                    @Html.DisplayNameFor(model => model.FinishDate)
-                </th>*@
+            @Html.DisplayNameFor(model => model.FinishDate)
+        </th>*@
             <th data-field="ArrivalDate" data-filter-control="select" data-sortable="true">
                 @Html.DisplayNameFor(model => model.ArrivalDate)
             </th>
@@ -86,8 +86,14 @@
             <th data-field="Accommodation" data-filter-control="select" data-sortable="true">
                 @Html.DisplayNameFor(model => model.Accommodation)
             </th>
+            <th data-field="AccommodationType" data-filter-control="select" data-sortable="true">
+                @Html.DisplayNameFor(model => model.AccommodationType)
+            </th>
             <th data-field="AccommodationDuration" data-filter-control="select" data-sortable="true">
                 @Html.DisplayNameFor(model => model.AccommodationDuration)
+            </th>
+            <th data-field="AccommodationDuration" data-filter-control="select" data-sortable="true">
+                @Html.DisplayNameFor(model => model.PartnerName)
             </th>
         </tr>
     </thead>
@@ -152,7 +158,13 @@
                     @Html.DisplayFor(modelItem => item.Accommodation)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.AccommodationType)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.AccommodationDuration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PartnerName)
                 </td>
             </tr>
         }

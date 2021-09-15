@@ -21,14 +21,14 @@ namespace RightWord.App.Controllers
         private readonly IStudentRepository _studentRepository;
         private readonly IStudentService _studentService;
         private readonly IAgencyRepository _agencyRepository;
-        private readonly UserManager<IdentityUser> _userManager;
+        //private readonly UserManager<IdentityUser> _userManager;
         //private readonly IDocumentRepository _documentRepository;
         private readonly IMapper _mapper;
 
         public StudentController(IStudentRepository studentRepository,
                                  IAgencyRepository agencyRepository,
                                  IStudentService studentService,
-                                 UserManager<IdentityUser> userManager,
+                                 //UserManager<IdentityUser> userManager,
                                  //IDocumentRepository documentRepository,
                                  IMapper mapper,
                                  INotificator notificator) : base(notificator)
@@ -36,7 +36,7 @@ namespace RightWord.App.Controllers
             _studentRepository = studentRepository;
             _agencyRepository = agencyRepository;
             _studentService = studentService;
-            _userManager = userManager;
+            //_userManager = userManager;
             //_documentRepository = documentRepository;
             _mapper = mapper;
         }
@@ -60,7 +60,7 @@ namespace RightWord.App.Controllers
             return View(students);
         }
 
-        //[Authorize(Roles = "Admin, Agency")]
+        [Authorize(Roles = "Admin, Agency, Student")]
         public async Task<IActionResult> Details(Guid id)
         {
             if (User.IsInRole("Student"))
@@ -79,6 +79,7 @@ namespace RightWord.App.Controllers
             return View(studentViewModel);
         }
 
+        [Authorize(Roles = "Admin, Agency, Student")]
         public async Task<IActionResult> Create()
         {
             var studentViewModel = await FillStudent(new StudentViewModel());
@@ -92,6 +93,7 @@ namespace RightWord.App.Controllers
             return View(studentViewModel);
         }
 
+        [Authorize(Roles = "Admin, Agency, Student")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(StudentViewModel studentViewModel)
@@ -120,10 +122,10 @@ namespace RightWord.App.Controllers
 
                 studentViewModel.PassportImage = imgPrefixo + studentViewModel.PassportUpload.FileName;
             }
-            else
-            {
-                return View(studentViewModel);
-            }
+            //else
+            //{
+            //    return View(studentViewModel);
+            //}
 
             await _studentService.Add(_mapper.Map<Student>(studentViewModel));
 
@@ -137,6 +139,7 @@ namespace RightWord.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin, Agency, Student")]
         public async Task<IActionResult> Edit(Guid id)
         {
             if (User.IsInRole("Student"))
@@ -156,6 +159,7 @@ namespace RightWord.App.Controllers
             return View(studentViewModel);
         }
 
+        [Authorize(Roles = "Admin, Agency, Student")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, StudentViewModel studentViewModel)
@@ -213,9 +217,9 @@ namespace RightWord.App.Controllers
 
             if (!IsValidOperation()) return View(studentViewModel);
 
-            var user = await _userManager.FindByNameAsync(studentViewModel.Email);
+            //var user = await _userManager.FindByNameAsync(studentViewModel.Email);
 
-            if (user != null) { await _userManager.DeleteAsync(user); }
+            //if (user != null) { await _userManager.DeleteAsync(user); }
             
             TempData["Success"] = "Student successfully deleted!";
 

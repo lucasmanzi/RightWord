@@ -15,6 +15,34 @@ namespace RightWord.Business.Models.Validations
             RuleFor(a => a.Name)
                 .NotEmpty()
                 .Length(2, 200);
+
+            //RuleFor(a => a.Name)
+            //    .NotEmpty()
+            //    .Length(2, 200);
+
+            //RuleFor(a => a.Name)
+            //    .NotEmpty()
+            //    .Length(2, 200);
+
+            //RuleFor(a => a.Name)
+            //    .NotEmpty()
+            //    .Length(2, 200);
+
+            //RuleFor(a => a.Name)
+            //    .NotEmpty()
+            //    .Length(2, 200);
+
+            //RuleFor(a => a.Name)
+            //    .NotEmpty()
+            //    .Length(2, 200);
+
+            //RuleFor(a => a.Name)
+            //    .NotEmpty()
+            //    .Length(2, 200);
+
+            //RuleFor(a => a.Name)
+            //    .NotEmpty()
+            //    .Length(2, 200);
         }
 
     }

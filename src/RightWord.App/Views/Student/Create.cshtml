@@ -162,12 +162,12 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label asp-for="Accommodation" class="control-label"></label>
-                            <select asp-for="Accommodation" class="form-control">
+                            <select asp-for="Accommodation" class="form-control" id="accommodation" onchange="AccomodatioChange()">
                                 <option value="0">No</option>
-                                <option value="1">Yes, Student Accommodation</option>
-                                <option value="2">Yes, Host Family</option>
+                                <option value="1">Single</option>
+                                <option value="2">Couple</option>
                             </select>
-                            <span asp-validation-for="Accommodation" class="text-danger"></span>
+                            <span asp-validation-for="AccommodationType" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -175,8 +175,19 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
+                            <label asp-for="AccommodationType" class="control-label"></label>
+                            <select asp-for="AccommodationType" class="form-control" id="accommodationType" disabled>
+                                <option value="0">No</option>
+                                <option value="1">Yes, Student Accommodation</option>
+                                <option value="2">Yes, Host Family</option>
+                            </select>
+                            <span asp-validation-for="AccommodationType" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
                             <label asp-for="AccommodationDuration" class="control-label"></label>
-                            <select asp-for="AccommodationDuration" class="form-control">
+                            <select asp-for="AccommodationDuration" class="form-control" id="accommodationDuration" disabled>
                                 <option value="0">No</option>
                                 <option value="1">1 Week</option>
                                 <option value="2">2 Weeks</option>
@@ -194,6 +205,16 @@
                                 <option value="14">14 Weeks</option>
                             </select>
                             <span asp-validation-for="AccommodationDuration" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="PartnerName" class="control-label"></label>
+                            <input asp-for="PartnerName" class="form-control" id="partnerName" disabled />
+                            <span asp-validation-for="PartnerName" class="text-danger"></span>
                         </div>
                     </div>
                 </div>

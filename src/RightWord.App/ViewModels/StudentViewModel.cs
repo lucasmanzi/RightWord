@@ -85,13 +85,23 @@ namespace RightWord.App.ViewModels
 
         [DisplayName("Accommodation")]
         [Required(ErrorMessage = "Field {0} is required")]
-        public AccommodationType Accommodation { get; set; }
-        
+        public AccommodationEnum Accommodation { get; set; }
+
+        [DisplayName("Accommodation Type")]
+        [Required(ErrorMessage = "Field {0} is required")]
+        public AccommodationTypeEnum AccommodationType { get; set; }
+
         [DisplayName("Accommodation Duration (Weeks)")]
         [Required(ErrorMessage = "Field {0} is required")]
         public int AccommodationDuration { get; set; }
 
-        [DisplayName("Active?")]
+        [DisplayName("Partner Name")]
+        //[Required(ErrorMessage = "Field {0} is required")]
+        [StringLength(300, ErrorMessage = "Field {0} lenght between {2} and {1} caracters.", MinimumLength = 2)]
+        public string PartnerName { get; set; }
+
+
+        [DisplayName("Registered")]
         public bool Active { get; set; }
 
         public AgencyViewModel Agency { get; set; }

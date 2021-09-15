@@ -1,9 +1,47 @@
 ﻿
 $(document).ready(function () {
     $("#msg_box").fadeOut(5000);
+
+    AccomodatioChange();
 })
 
 $('#table').bootstrapTable('resetView', { height: 200 });
+
+//document.getElementById('accommodation').onchange = function () {
+//    document.getElementById("TfLroad").disabled = (this.value === '0');
+//}
+
+function AccomodatioChange() {
+    var accomodationValue = document.getElementById("accommodation").value;
+    var type = document.getElementById("accommodationType");
+    var duration = document.getElementById("accommodationDuration");
+    var partnerName = document.getElementById("partnerName");
+
+    switch (accomodationValue) {
+        case "0":
+            type.disabled = duration.disabled = partnerName.disabled = true;
+            type.value = 0;
+            duration.value = 0;
+            partnerName.value = "";
+            break;
+
+        case "1":
+            type.disabled = duration.disabled = false;
+            partnerName.disabled  = true;
+            partnerName.value = "";
+            break;
+
+        case "2":
+            type.disabled = duration.disabled = partnerName.disabled = false;
+            break;
+
+        default:
+            type.disabled = duration.disabled = partnerName.disabled  = false;
+            break;
+    }
+
+    
+};
 
 
 ///*function AjaxModal() {

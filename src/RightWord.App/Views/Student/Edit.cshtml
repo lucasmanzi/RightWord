@@ -157,12 +157,12 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label asp-for="Accommodation" class="control-label"></label>
-                            <select asp-for="Accommodation" class="form-control">
+                            <select asp-for="Accommodation" class="form-control" id="accommodation" onchange="AccomodatioChange()">
                                 <option value="0">No</option>
-                                <option value="1">Yes, Student Accommodation</option>
-                                <option value="2">Yes, Host Family</option>
+                                <option value="1">Single</option>
+                                <option value="2">Couple</option>
                             </select>
-                            <span asp-validation-for="Accommodation" class="text-danger"></span>
+                            <span asp-validation-for="AccommodationType" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -170,8 +170,19 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
+                            <label asp-for="AccommodationType" class="control-label"></label>
+                            <select asp-for="AccommodationType" class="form-control" id="accommodationType" disabled>
+                                <option value="0">No</option>
+                                <option value="1">Yes, Student Accommodation</option>
+                                <option value="2">Yes, Host Family</option>
+                            </select>
+                            <span asp-validation-for="AccommodationType" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
                             <label asp-for="AccommodationDuration" class="control-label"></label>
-                            <select asp-for="AccommodationDuration" class="form-control">
+                            <select asp-for="AccommodationDuration" class="form-control" id="accommodationDuration" disabled>
                                 <option value="0">No</option>
                                 <option value="1">1 Week</option>
                                 <option value="2">2 Weeks</option>
@@ -189,6 +200,16 @@
                                 <option value="14">14 Weeks</option>
                             </select>
                             <span asp-validation-for="AccommodationDuration" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="PartnerName" class="control-label"></label>
+                            <input asp-for="PartnerName" class="form-control" id="partnerName" disabled />
+                            <span asp-validation-for="PartnerName" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -244,22 +265,22 @@
 
     <!-- Modal -->
     @*<div class="modal fade" id="viewFileModal" tabindex="-1" aria-labelledby="viewfileModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="viewfileModalLabel">Passport Image</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <iframe src="~/uploadedFiles/@Model.PassportImage" class="w-100 h-auto"></iframe>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="viewfileModalLabel">Passport Image</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe src="~/uploadedFiles/@Model.PassportImage" class="w-100 h-auto"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>*@
+        </div>*@
 
     @*<div id="myModal" class="modal fade in">
             <div class="modal-dialog">

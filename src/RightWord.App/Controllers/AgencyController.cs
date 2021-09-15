@@ -62,14 +62,14 @@ namespace RightWord.App.Controllers
         [Authorize(Roles = "Admin, Agency")]
         public async Task<IActionResult> Create()
         {
-            var agencyViewModel = FillAgency(new AgencyViewModel());
-
             if (User.IsInRole("Agency"))
             {
                 var result = await _agencyRepository.Find(x => x.Email == User.Identity.Name);
                 if (result.Any())
                     return RedirectToAction("Edit/", result.FirstOrDefault().Id.ToString());
             }
+
+            var agencyViewModel = await FillAgency(new AgencyViewModel());
 
             return View(agencyViewModel);
         }
@@ -161,11 +161,11 @@ namespace RightWord.App.Controllers
             return RedirectToAction(nameof(Index));
         }
         
-        private Task<AgencyViewModel> FillAgency(AgencyViewModel agency)
+        private async Task<AgencyViewModel> FillAgency(AgencyViewModel agency)
         {
             agency.Countries = CultureHelper.CountryList();
 
-            return Task.FromResult(agency);
+            return agency;
         }
     }
 }

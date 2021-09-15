@@ -11,9 +11,14 @@
         {
             <p>This is the student area!</p>
         }
-        else if(User.IsInRole("Agency"))
+        else if (User.IsInRole("Agency"))
         {
             <p>This is the agency area!</p>
+        }
+        else if (!User.IsInRole("Admin"))
+        {
+            <h4 style="color: red">Your access is being analised. Please, finish your registration later.</h4>
+            <h4 style="color: red">Contact your agent or school to activate.</h4>
         }
     </div>
 </div>

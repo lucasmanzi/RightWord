@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RightWord.Data.Context;
 
 namespace RightWord.Data.Migrations
 {
     [DbContext(typeof(RightWordDbContext))]
-    partial class RightWordDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210914004456_RequiredFalse")]
+    partial class RequiredFalse
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,9 +112,6 @@ namespace RightWord.Data.Migrations
                     b.Property<int>("AccommodationDuration")
                         .HasColumnType("int");
 
-                    b.Property<int>("AccommodationType")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
@@ -146,9 +145,6 @@ namespace RightWord.Data.Migrations
                     b.Property<string>("NativeLanguage")
                         .IsRequired()
                         .HasColumnType("varchar(120)");
-
-                    b.Property<string>("PartnerName")
-                        .HasColumnType("varchar(300)");
 
                     b.Property<string>("Passport")
                         .IsRequired()

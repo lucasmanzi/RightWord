@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RightWord.App.ViewModels;
 using RightWord.Business.Interfaces;
+using RightWord.Business.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +19,28 @@ namespace RightWord.App.Controllers
     {
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly IStudentService _studentService;
+        private readonly IStudentRepository _studentRepository;
+        private readonly IAgencyService _agencyService;
+        private readonly IAgencyRepository _agencyRepository;
+        private readonly IMapper _mapper;
 
         public AdministrationController(RoleManager<IdentityRole> roleManager,
                                         UserManager<IdentityUser> userManager,
+                                        IStudentService studentService,
+                                        IStudentRepository studentRepository,
+                                        IAgencyService agencyService,
+                                        IAgencyRepository agencyRepository,
+                                        IMapper mapper,
                                         INotificator notificator) : base(notificator)
         {
             _roleManager = roleManager;
             _userManager = userManager;
+            _studentService = studentService;
+            _studentRepository = studentRepository;
+            _agencyService = agencyService;
+            _agencyRepository = agencyRepository;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
@@ -123,16 +140,21 @@ namespace RightWord.App.Controllers
 
             foreach (var user in _userManager.Users)
             {
-                if (user.UserName != User.Identity.Name && user.UserName.ToLower() != "support@rightword.com")
-                {
-                    var userRoleViewModel = new UserRoleViewModel
-                    {
-                        UserId = user.Id,
-                        UserName = user.UserName,
-                        IsSelected = usersList.Any(x => x.Id == user.Id)
-                    };
+                var userRoles = await _userManager.GetRolesAsync(user);
 
-                    model.Add(userRoleViewModel);
+                if (!userRoles.Any() || usersList.Any(x => x.Id == user.Id))
+                {
+                    if (user.UserName != User.Identity.Name && user.UserName.ToLower() != "support@rightword.com")
+                    {
+                        var userRoleViewModel = new UserRoleViewModel
+                        {
+                            UserId = user.Id,
+                            UserName = user.UserName,
+                            IsSelected = usersList.Any(x => x.Id == user.Id)
+                        };
+
+                        model.Add(userRoleViewModel);
+                    }
                 }
             }
 
@@ -148,7 +170,7 @@ namespace RightWord.App.Controllers
 
             foreach (var item in model)
             {
-                var user = await _userManager.FindByIdAsync(item.UserId);
+                var user = await _userManager.FindByNameAsync(item.UserName);
 
                 if (item.IsSelected && !(await _userManager.IsInRoleAsync(user, role.Name)))
                 {
@@ -162,5 +184,35 @@ namespace RightWord.App.Controllers
 
             return RedirectToAction("EditRole", new { Id });
         }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Delete(Guid id, Guid roleId)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user == null) return NotFound();
+            await _userManager.DeleteAsync(user);
+
+            var student = await _studentRepository.Find(x => x.Email == user.UserName);
+            if (student.Any())
+            {
+                var studentId = _mapper.Map<IEnumerable<StudentViewModel>>(student).FirstOrDefault().Id;
+                await _studentService.Delete(studentId);
+            }
+
+            var agency = await _agencyRepository.Find(x => x.Email == user.UserName);
+            if (agency.Any())
+            {
+                var agencyId = _mapper.Map<IEnumerable<AgencyViewModel>>(agency).FirstOrDefault().Id;
+                await _agencyService.Delete(agencyId);
+            }
+
+
+            TempData["Success"] = "Student successfully deleted!";
+
+            id = roleId;
+
+            return RedirectToAction("EditUsersInRole", new { id });
+        }
+
     }
 }

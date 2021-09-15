@@ -79,8 +79,8 @@ namespace RightWord.App.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            //returnUrl = returnUrl ?? Url.Content("~/");
-            returnUrl = Url.Content("~/Student/Create");
+            returnUrl = returnUrl ?? Url.Content("~/");
+            //returnUrl = Url.Content("~/Student/Create");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
@@ -103,7 +103,8 @@ namespace RightWord.App.Areas.Identity.Pages.Account
 
                     var userRole = _userService.GetUserProfile(Input.Email);
 
-                    var roleResult = await RoleRegister(user, userRole["role"]);
+                    if (!string.IsNullOrEmpty(userRole["id"]))
+                        await RoleRegister(user, userRole["role"]);
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
@@ -111,10 +112,13 @@ namespace RightWord.App.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        if(!string.IsNullOrEmpty(userRole["id"]))
-                            returnUrl = Url.Content("~/Home");
-                        
+                        //if (!string.IsNullOrEmpty(userRole["id"]))
+                        //{
+                        //    returnUrl = Url.Content("~/Home");
+                        //}
+
                         await _signInManager.SignInAsync(user, isPersistent: false);
+
                         return LocalRedirect(returnUrl);
                     }
                 }
